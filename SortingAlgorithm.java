@@ -1,18 +1,32 @@
 public class SortingAlgorithm {
     public static void insertionSort(long[] array) {
-// start from 2nd element and move it to the end of the array
+// iterate over each element starting from the second one
         for (int i = 1; i < array.length; i++) {
             long key = array[i];
-            int previousIndex = i - 1;
-//shift elements of the sorted portion that are greater than the key to the right
-            while (previousIndex >= 0 && array[previousIndex] > key) {
-                array[previousIndex + 1] = array[previousIndex];
-                previousIndex = previousIndex - 1;
-            }
-//insert the key into correct position
-            array[previousIndex + 1] = key;
-        }
-    }
+			int low = 0;
+			int high = i - 1;
+			
+// binary search for the correct position of the key
+		while (low <= high){
+			int mid = low + (high - low) / 2;
+			
+			if (array[mid] > key) {
+				high = mid - 1;
+			} else {
+				low = mid + 1;
+			}
+		}
+// position where the key should be inserted
+		int position = low;
+// move elements to the right to make space for the key
+		if (position < i) {
+			System.arraycopy(array, position, array, position + 1, i - position);
+		}
+// insert the key into correct position
+		array[position] = key; 
+	}
+}		
+	
 // check if the list is not empty
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -34,6 +48,7 @@ public class SortingAlgorithm {
 		}
 // create array of the correct size for valid numbers
         long[] array = new long[validCount];
+// copy from tempArray to array
 		System.arraycopy(tempArray, 0, array, 0, validCount);
 		
 		if (array.length == 0) {

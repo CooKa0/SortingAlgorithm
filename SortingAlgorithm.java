@@ -55,9 +55,18 @@ public class SortingAlgorithm {
 			System.out.println("No valid numbers provided to sort.");
 			return;
 		}
+		
+// print array before sorting
+		System.out.println("Array before sorting:");
+		for (long i : array) {
+			System.out.println(i + " ");
+		}
+		System.out.println();
+		
 // sorting
         insertionSort(array);
-// printing out array
+		
+// printing out array after sorting
         System.out.println("Sorted array:");
         for (long i : array) {
             System.out.print(i + " ");
